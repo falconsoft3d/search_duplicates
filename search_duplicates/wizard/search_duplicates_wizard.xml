@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="search_duplicates_wizard_view" model="ir.ui.view">
+        <field name="name">Search Duplicates Wizard Form View</field>
+        <field name="model">search.duplicates.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Search Duplicates">
+                <group name="main">
+                    <group name="left">
+                        <field name="model_id" />
+                        <field name="field_id" widget="selection" />
+                        <field name="view_mode" widget="radio" />
+                    </group>
+                    <group name="right">
+                        <field name="Search Duplicates" />
+                        <field name="field_ids" widget="many2many_tags"
+                            attrs="{'invisible': [('view_mode', '=', 'list')]}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Close" class="btn-default"
+                        special="cancel"/>
+                    <button string='Search Duplicates' name="search_dupes"
+                        type="object" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <act_window id="search_duplicates_wizard_action"
+        name="Search Duplicates"
+        res_model="search.duplicates.wizard"
+        view_id="search_duplicates_wizard_view"
+        view_mode="form"
+        target="new"
+        />
+    <menuitem id="search_duplicates_wizard_menu" 
+        name="Search Duplicates"
+        parent="base.menu_administration"
+        action="search_duplicates_wizard_action"
+        sequence="32" />
+</odoo>
